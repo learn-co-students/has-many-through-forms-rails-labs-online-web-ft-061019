@@ -11,12 +11,12 @@ describe 'Posts', type: 'feature' do
       fill_in('post_content', :with => 'This is going to be an awesome post!')
     end
 
-#    it 'can create a post without a new category' do
-      #click_button('Create Post')
-     # @category = Post.last.categories.first.name
-    #  expect(@category).to be_empty
-     # expect(page).to have_content('Feeling Awesome')
-   # end
+    it 'can create a post without a new category' do
+      click_button('Create Post')
+      @category = Post.last.categories.first.name
+      expect(@category).to be_empty
+      expect(page).to have_content('Feeling Awesome')
+    end
 
     it 'can create a post with a previously created category' do
       check('Cool')
