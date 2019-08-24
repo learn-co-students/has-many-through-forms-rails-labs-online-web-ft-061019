@@ -7,13 +7,10 @@ class Post < ActiveRecord::Base
 
 
   def categories_attributes=(categories_attributes)
-    categories_attributes.values.each do |category_attributes|
-      if category_attributes[:name].present?
-        category = Category.find_or_create_by(category_attributes)
-        if !self.categories.include?(category)
-          self.post_categories.build(:category => category)
-        end
-      end
+   
+    categories_attributes.values.each do |category_attribute|
+      category = Category.find_or_create_by(category_attribute)
+      self.categories << category
     end
   end
 
