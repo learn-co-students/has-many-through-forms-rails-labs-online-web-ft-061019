@@ -5,5 +5,5 @@ class Post < ActiveRecord::Base
   has_many :users, through: :comments
 
   accepts_nested_attributes_for :comments, reject_if: ->(attributes){ attributes['content'].blank? }
-
+  accepts_nested_attributes_for :categories#, reject_if: :all_blank
 end

@@ -7,29 +7,10 @@
    
    <%= f.label :category_ids, "Categories: " %>
    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %><br>
-   
-   <%= f.hidden_field :post_id, value: @post.id %>
 
-   <h2>Comments</h2>
-
-   <% @post.comments.each do |comment| %>
-      <%= "#{comment.user.username} says: #{comment.content}" unless comment.user.nil? %> 
-   <% end unless @post.comments.empty? %>
-
-   <%= fields_for :comment, @post.comments.build do |c|%>
-      <%= c.collection_select :user_id, User.all, :id, :username, {include_blank: "Create New"} %><br> 
-      
-      <!-- <%= fields_for :comment_user_attributes, @post.comments.first.user do |u| %>
-         <%= u.label :username, "New Username: " %>
-         <%= u.text_field :username, value: ""%><br>
-      <% end %>
-       -->
-      <%= c.label :user_attributes_username, "New Username: "%>
-      <%= c.text_field :user_attributes_username, value: ""%>
-
-      <%= c.label :content, "Content: " %>
-      <%= c.text_field :content %><br>
-      <%= c.submit "Create Comment" %>
+   <%= f.fields_for :categories, @post.categories.build do |c|%>
+      <%= c.label :name, "New category name: "%>
+      <%= c.text_field :name %>
    <% end %>
 
    <%= f.submit %>
